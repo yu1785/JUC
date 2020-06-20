@@ -1,4 +1,4 @@
-package com.yu.add;
+package com.yu.juc.add;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;

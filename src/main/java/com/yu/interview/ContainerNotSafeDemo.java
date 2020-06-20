@@ -1,6 +1,7 @@
 package com.yu.interview;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author zxy
@@ -14,7 +15,16 @@ public class ContainerNotSafeDemo {
 
 //        List<String> list = new ArrayList<>();
         // ArrayList 线程不安全
-        List<String> list = new Vector<>();
+        // java.util.ConcurrentModificationException 并发修改异常
+
+        // 1. Vector 其add方法有synchronized关键字
+//        List<String> list = new Vector<>();
+        // 2. Collections.synchronizedList(new ArrayList<>()) 其add方法有synchronized关键字
+//        List<String> list = Collections.synchronizedList(new ArrayList<>());
+        // 3、List<String> list = new CopyOnWriteArrayList<>()；
+        // add 方法加了锁
+        List<String> list = new CopyOnWriteArrayList<>();
+
 
         // TODO
         for (int i = 1; i <= 10; i++) {
@@ -23,7 +33,6 @@ public class ContainerNotSafeDemo {
                 System.out.println(list);
             },String.valueOf(i)).start();
         }
-        // java.util.ConcurrentModificationException 并发修改异常
 
     }
 }
