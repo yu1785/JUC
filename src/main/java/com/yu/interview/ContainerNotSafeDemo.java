@@ -1,11 +1,16 @@
 package com.yu.interview;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 /**
  * @author zxy
  * @date 2020/6/19 15:41
+ *
+ * 集合类不安全问题
+ *      ArrayList、HashSet、HashMap
  */
 public class ContainerNotSafeDemo {
     public static void main(String[] args) {
@@ -19,11 +24,19 @@ public class ContainerNotSafeDemo {
 
         // 1. Vector 其add方法有synchronized关键字
 //        List<String> list = new Vector<>();
+
         // 2. Collections.synchronizedList(new ArrayList<>()) 其add方法有synchronized关键字
 //        List<String> list = Collections.synchronizedList(new ArrayList<>());
+
+
         // 3、List<String> list = new CopyOnWriteArrayList<>()；
         // add 方法加了锁
         List<String> list = new CopyOnWriteArrayList<>();
+
+        // new CopyOnWriteArraySet<>() 的底层是 CopyOnWriteArrayList<E>()
+        // Set<String> set = new CopyOnWriteArraySet<>();
+
+//        Map<Object, Object> map = new ConcurrentHashMap<>();
 
 
         // TODO
